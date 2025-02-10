@@ -1,0 +1,34 @@
+In search box what ever you write is called a query.
+
+Metadata:
+Information about data.
+host:
+From which machine data generated.
+
+source:
+Path of the generated data.
+
+sourcetype:
+logical segregation of data.
+
+data related to download.
+data related to upload.
+
+fields:
+Fields are the searchable name or value in splunk.
+
+Abdul Wahab
+Susmitha V
+Yasif Ali
+
+name:
+surname:
+
+sign left side of fields:
+alfa sign means its a alfa-numerical field.
+hash sign means its a numerical field.
+
+event:
+A single piece of the log is called event.
+
+
