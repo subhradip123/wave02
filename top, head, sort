@@ -1,0 +1,27 @@
+top:
+used to fetch the maximum occurance of a field value.
+.. | top <field_name1> <FN2> <FN3> ..
+
+rare:
+index=_internal sourcetype=splunkd_ui_access 
+| rare file limit=20
+
+head:
+it shows 1st 10 values.
+eg.
+index=_internal sourcetype=splunkd_ui_access 
+| table file 
+| dedup file 
+| head 20
+
+tail:
+index=_internal sourcetype=splunkd_ui_access 
+| table file 
+| dedup file 
+| tail 20
+
+difference between top and head command??
+
+sort:
+.. | sort <field_name>  -->assending order
+.. | sort - <field_name> -->decending order
