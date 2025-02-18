@@ -1,0 +1,45 @@
+search:
+index=_internal sourcetype=splunkd_ui_access
+| table file bytes
+| dedup file bytes
+| search file=messages
+
+where:
+index=_internal sourcetype=splunkd_ui_access
+| table file bytes
+| dedup file bytes
+| where file="messages"
+
+What is the difference between search and where commands?
+In where command we can compare between two fields.
+eg.
+index=_internal sourcetype=splunkd_ui_access
+| table file bytes
+| dedup file bytes
+| eval "Threshold"=2000
+| where bytes<Threshold
+
+Operators:
+AND:
+index=_internal sourcetype=splunkd_ui_access
+| table file bytes
+| dedup file bytes
+| search file="events" AND bytes="66789"
+
+OR:
+index=_internal sourcetype=splunkd_ui_access
+| table file bytes
+| dedup file bytes
+| search file="control" OR file="events"
+
+NOT:
+index=_internal sourcetype=splunkd_ui_access
+| table file bytes
+| dedup file bytes
+| search NOT file="events"
+
+We can use them together.
+index=_internal sourcetype=splunkd_ui_access
+| table file bytes
+| dedup file bytes
+| search NOT (file="events" OR file="control" OR file="splunkd")
