@@ -1,0 +1,47 @@
+fields:
+Filter out fields. Segregate the data against field name.
+| fields <field_name1> <FN2> <FN3> ....
+eg.
+index=_internal sourcetype=splunkd_ui_access
+| fields bytes clientip file
+
+we can use a not operator here to not see the specific fields.
+eg.
+index=_internal sourcetype=splunkd_ui_access
+| fields - bytes clientip file
+
+field names are case sensitive.
+fields command support wild card entries.
+field command is faster than table command.
+
+table:
+.. | table <field name 1> <FN2> ..
+
+eg.
+index=_internal sourcetype=splunkd_ui_access 
+| table b* c* file splunk*
+
+dedup:
+used to de duplicating values.
+eg.
+index=_internal sourcetype=splunkd_ui_access 
+| table file status
+| dedup status file
+
+rename:
+used to rename a field.
+eg.
+index=_internal sourcetype=splunkd_ui_access 
+| table file status
+| dedup status file
+| rename status as http_status
+
+replace:
+used to replace a field value with desired value.
+.. | replace <old_value> with <new_value> IN <field_name>
+
+eg.
+index=_internal sourcetype=splunkd_ui_access 
+| table file status
+| dedup status file
+| replace 200 with 2000 IN status
