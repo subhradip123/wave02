@@ -1,0 +1,54 @@
+eval:(evaluation)
+we can use mathematical logics with eval.
+
+... | eval "<field_name>"=logic
+... | eval "<field_name1>"=logic1, "<field_name2>"=logic2 .....
+
+eg.
+index=_internal sourcetype="splunkd_ui_access"
+| table bytes status
+| eval "sum"='bytes'+'status', subs=bytes-status, multi=bytes*status, div=bytes/status
+
+task:
+index=_internal sourcetype="splunkd_ui_access"
+| table bytes
+convert this bytes to mb?
+
+round up a number:
+.. | eval "new"=round(field_name,<digits upto what decimal to round up>)
+				= round(field_name) [round upto zero decimal]
+				
+eg.
+index=_internal sourcetype="splunkd_ui_access"
+| table bytes status
+| eval "sum"='bytes'+'status', subs=bytes-status, multi=bytes*status, div=bytes/status
+| eval "div_rounded"=round(div,1)		
+
+concatinate:
+.. | eval "field_name"='fieldname1'.'fieldname2'."string"."symbols or spaces"
+
+name		surname
+Subhradip 	Baidya
+
+| eval "Full_name"='name'." ".'surname'
+
+eg.
+index=_internal sourcetype="splunkd_ui_access"
+| table uri_path user
+| eval "user_uri_path"='user'." - ".'uri_path'
+
+lowercase to uppercase:
+.. | eval "new_field" = lower(field_name)
+
+.. | eval "new field"= uppwer(field_name)
+
+name		surname
+subhradip 	baidya
+| makeresults
+| eval "name"="subhradip", "surname"="baidya"
+
+how we can make a field "full_name" like "Subhradip Baidya"?
+	
+index=_internal sourcetype="splunkd_ui_access"
+| table file method
+| eval "small_method"=lower(method), "caps_file"=upper(file)
