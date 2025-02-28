@@ -1,0 +1,70 @@
+addcoltotals:
+add a aditional row written summation of the field values.
+.. | addcoltotals <FN1> <FN2>       [we always need two numerical fields to use adcoltotals]
+eg.
+index=_internal sourcetype="splunkd_ui_access" 
+| table user bytes status
+| head
+| addcoltotals bytes
+
+labelfield, label:
+index=_internal sourcetype="splunkd_ui_access" 
+| table user bytes status
+| head
+| addcoltotals bytes labelfield=user
+
+index=_internal sourcetype="splunkd_ui_access" 
+| table user bytes status
+| head
+| addcoltotals bytes labelfield=user label=Sum
+
+addtotals:
+create row-wise summation.
+
+.. | addtotals <FN1> <FN2>
+
+eg.
+index=_internal sourcetype="splunkd_ui_access" 
+| table user bytes status
+| head
+| addtotals bytes status
+
+rename the field total:
+eg.index=_internal sourcetype="splunkd_ui_access" 
+| table user bytes status
+| head
+| addtotals bytes status fieldname=SUM
+
+append:
+we can join result from one query with another query.
+eg.
+index=_internal sourcetype="splunkd_ui_access" 
+| table user bytes status 
+| head 
+| append 
+    [| search index=_internal sourcetype="splunkd_access" 
+    | table user bytes status 
+    | head]
+	
+eg.
+index=_internal sourcetype="splunkd_ui_access" 
+| table user bytes status 
+| head 
+| append 
+    [| search index=_internal sourcetype="splunkd_access" 
+    | table user bytes status 
+    | head] 
+| append 
+    [| makeresults 
+    | eval user="Ali", status="404" 
+    | fields - _time]
+	
+appendcols:
+index=_internal sourcetype="splunkd_ui_access" 
+| table user bytes status 
+| head 
+| appendcols
+    [| search index=_internal sourcetype="splunkd_access" 
+    | table user bytes status 
+    | head] 
+	
