@@ -1,0 +1,30 @@
+lookups:
+Krishna is a senior engineer.
+Lokanadham is an accociate engineer.
+Sajida is a splunk admin.
+
+
+dest				salary
+senior engineer		80000
+accociate engineer	70000
+splunk admin		60000
+
+| inputlookup status_code.csv --> show the content of status_code.csv
+
+index=_internal sourcetype=splunkd_ui_access
+| table user bytes
+| dedup user bytes
+| outputlookup abc.csv ---> write into abc.csv
+
+.. | lookup abc.csv <field_present_in_csv> as <field_to_be_matched> output(replace data)/outputnew(it do not replace the data) <which_fields to show from csv>
+
+eg.
+index=_internal sourcetype=splunkd_ui_access
+| table method status
+| dedup method status
+| lookup status_code.csv code as status output status_description
+
+
+lookup definition:
+
+automatic lookup:
