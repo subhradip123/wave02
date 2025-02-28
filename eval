@@ -52,3 +52,36 @@ how we can make a field "full_name" like "Subhradip Baidya"?
 index=_internal sourcetype="splunkd_ui_access"
 | table file method
 | eval "small_method"=lower(method), "caps_file"=upper(file)
+
+conditional function:
+if...else:
+... | eval "new_field_name"=if(condition,"value to show","else values to show")
+eg.
+index=_internal sourcetype="splunkd_ui_access" 
+| table user file bytes
+| eval "bytes_usage"=if(bytes>30000,"exesive","normal")
+
+.. | eval "new_field_name"=if(condition1,"value to show",if(condition2,"value to show","else the value to show"))
+eg.
+index=_internal sourcetype="splunkd_ui_access" 
+| table user file bytes
+| eval "bytes_usage"=if(bytes>40000,"exesive",if(bytes>20000 AND bytes<40000,"normal","low usage"))
+
+case:
+.. | eval "new_field"=case(condition1,"value to show",condition2,"value to show",........,1=1,"default value to show")
+eg.
+index=_internal sourcetype="splunkd_ui_access" 
+| table user file bytes
+| eval "bytes_usage"=case(bytes>40000,"exesive",bytes>20000 AND bytes<40000,"normal",1=1,"low usage")
+
+tast:
+index=_internal sourcetype="splunkd_ui_access" 
+| table method status
+| dedup method status
+
+use case statement to show the http status for status code:
+1xx informational response – the request was received, continuing process
+2xx successful – the request was successfully received, understood, and accepted
+3xx redirection – further action needs to be taken in order to complete the request
+4xx client error – the request contains bad syntax or cannot be fulfilled
+5xx server error – the server failed to fulfil an apparently valid request
