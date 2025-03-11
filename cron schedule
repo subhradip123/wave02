@@ -1,0 +1,32 @@
+cron schedule:
+* * * * *
+1 2 3 4 5
+
+1-->minute of an hour(0-59)
+2-->hours of a day(0-23)
+3-->day of a month(1-31)
+4-->month of a year(1-12)
+5-->day of a week(0-7) [0,7- sunday, 1-monday, 2-tuesday......]
+
+check cron schedule:
+https://crontab.guru/
+
+eg.
+15 * * * * ->9.15,10.15....
+10,50 * * * * ->9.10, 9.50, 10.10, 10.50....
+*/10 * * * * -> 9.00,9.10,9.20,9.30,9.40....
+
+0 11 * * * -> 11.00
+10 11,18 * * * ->11.10, 18.10
+20 */4 * * * ->12.20, 4.20, 20.20 ...
+
+at 8.50 on 5th of every month:
+50 8 5 * * 
+in every 4 days at 9.10:
+10 9 */4 * *
+
+at 8.50 on 5th of may
+50 8 5 5 *
+
+every monday at 10.10:
+10 10 * * 1
