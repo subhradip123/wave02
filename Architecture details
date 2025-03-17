@@ -1,0 +1,68 @@
+Architecture details:(Distributed non-clustered environment)
+
+1. Universal forwarder: Install splunk universal forwarder package. It only have CLI , no GUI.
+We use two conf files there.
+inputs.conf : ingest the data.
+outputs.conf : to which instance the data need to forward.
+
+2. Heavy forwarder: (props.conf, transforms.conf)
+a> parsing(props.conf)
+This is Shree. This is Krishna. This is Sajida. This is Susmita.
+
+This is Shree. 
+
+This is Krishna. 
+
+This is Sajida. 
+
+This is Susmita.
+
+b> masking:
+Krishna acc number 1234567899876 has debited rs.2000.
+
+Krishna acc number xxxxxxxxxx876 has debited rs.2000.
+
+c> filtering (transforms.conf)
+
+Shee has logged in from 192.168.35.22
+
+Krishna has logged in from 192.168.35.21
+
+Sajida has logged out from 192.168.35.25
+
+Sushmita has logged out from 192.168.35.26
+
+If we want only log oug related logs, we can ingest those only filtering out the log in related logs.
+By doing this we are getting very neat data for our visulizations and we are saving license usage.
+
+3. Indexer: (indexes.conf)
+Index is the path or directory where we store the data.
+
+4. LM: License master:
+a> License stacking:
+100gb/day + 50 gb/day --->150 gb/day.
+
+b> License pooling:
+100 gb/day.
+
+pool A: 80 gb/day -> Idx
+pool B: 20 gb/day -> SH, DS
+
+License limit exceed > 5 times in a rolling period of 30 days.
+
+17th march -> 1
+
+17th april -> 5
+
+< 6.5(splunk version) -->Indexing continues but cant search the data --> 'litsearch error'
+>= 6.5(splunk version) -->Indexing continues, you can search the data, but splunk can take legal action against you or your organization.
+
+License got expired -> Indexing continues. But searches are blocked.
+
+License master goes down -> >72hrs then indexing continues, searches are blocked.
+
+
+
+
+
+
