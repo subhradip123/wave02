@@ -1,0 +1,11 @@
+connect the server from browser.
+
+vi a.sh
+paste the script there.
+save the file.
+
+
+change the permission of that file:
+# chmod +x a.sh
+execute the script..
+#./a.sh
