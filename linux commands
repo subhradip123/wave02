@@ -1,0 +1,50 @@
+Things to do:
+create account in aws.
+download and install putty.
+download and install winscp.
+
+commands:
+1. ls: list of the files in a directory.
+2. cd: change directory.
+3. rm: remove a file.
+4. cat: see contents of a file.
+5. mkdir: make directory.
+6. cp: copy
+7. tar: zip and upzip a directory/file. tar xvfz ...  tar cvfz ...
+8. ifconfig: to check the ip address
+9. wget: download file from internet.
+10. init: init 0: shut the server down   init 6: restart
+11. pwd: present working directory.
+12. mv: to move or to rename a file.
+13. history: to check the history of fired commands.
+14. whoiam: servername/hostname
+15. ping: connectivity status
+16. df: free disk space
+17. rmdir: remove the empty directory
+18. clear: clear the screen
+19. exit: exit from the current operation
+20. log out: log out
+21. sudo su: superuser do
+
+what is linux , different types of linux out there.
+difference between linux and windown?
+different types of windows server version?
+linux default directories.
+
+
+vi editor commands:
+vi <file_name> --> creates file
+i -- insert mode
+esc --> command mode
+:wq --> save and quit
+:q --> quit
+shift g --> to go bottom of the file.
+yy --> to copy the 1st line where the control is.
+4/5yy ---> to copy 4/5 lines.
+p -->paste
+dd ---> cut
+4/5 dd --> cut 4 or 5 lines
+/keyword ---> esc mode to search the keywork.
+3u ---> undo 3 steps.
+
+:%s/<keyword>/<new_keyword>/g
