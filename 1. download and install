@@ -1,0 +1,20 @@
+to download splunk:
+
+go to splunk.com ---> create an account ----> download with wgwt command or download in your pc later on transfer the package with winscp
+
+wget -O splunk-8.2.4-87e2dda940d1-Linux-x86_64.tgz 'https://download.splunk.com/products/splunk/releases/8.2.4/linux/splunk-8.2.4-87e2dda940d1-Linux-x86_64.tgz'
+
+go to the directory where you want to install splunk. the installation package should be there.
+.....
+tar xvfz splunkforwarder-8.2.4-87e2dda940d1-Linux-s390x.tgz
+for 1st time accept license.
+
+#SPLUNK_HOME/bin/
+./splunk start --accept-license
+
+to run splunk at start up
+cd #SPLUNK_HOME/bin/
+./splunk enable boot-start
+
+
+#SPLUNK_HOME/bin/splunk start | stop | status
