@@ -1,0 +1,82 @@
+To do:
+study about splunk file precedence!
+https://docs.splunk.com/Documentation/Splunk/9.4.1/Admin/Wheretofindtheconfigurationfiles
+
+server configuration:
+UF>>
+connect HF from UF
+from UF
+# cd /opt/splunkforworder/bin
+#./splunk add forward-server <ip-of-HF>:9997
+eg:
+./splunk add forward-server 3.140.192.156:9997
+
+restart splunk.
+
+cross check:
+# cd /opt/splunk/etc/system/local
+# ls
+outputs.conf
+
+
+HF>>
+enable 9997 port.
+
+from HF
+GUI>>
+
+settings--> forwarding $ recieving --> configure receiving --> new recieving port
+
+CLI>>
+
+# cd /opt/splunk/bin
+# ./splunk enable listen 9997
+
+
+connect IDX from HF:
+#./splunk add forward-server <ip-of-IDX>:9997
+eg:
+./splunk add forward-server 172.31.29.34:9997
+
+restart splunk.
+
+cross check:
+# cd /opt/splunk/etc/system/local
+# ls
+outputs.conf
+
+
+IDX>>
+enable 9997 port.
+
+from IDX 
+GUI>>
+
+settings--> forwarding $ recieving --> configure receiving --> new recieving port
+
+CLI>>
+
+# cd /opt/splunk/bin
+# ./splunk enable listen 9997
+
+
+SH>>
+
+connect IDX with SH:
+
+GUI>>
+settings-->distributed search-->search peer-->add new search peer
+
+https://<ip_of_IDX>:8089
+splunk admin username & password of Idx 
+
+
+CLI>>
+
+# cd /opt/splunk/etc/system/local
+# vi distsearch.conf
+add one attribute:
+eg: servers = https://172.31.29.34:8089
+
+settings-->server settings-->general settings-->Pause indexing if free disk space make it 50
+restart
