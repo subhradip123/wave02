@@ -1,0 +1,26 @@
+inputs.conf
+
+[monitor://<path of the log>]  --> anything inside this square bracket is called stanza.
+index = <index_name>
+sourcetype = <sourcetype_name>
+
+
+test.txt
+abc.txt
+
+test.json
+xyz.json
+
+abc.csv
+
+[monitor:///opt/test_onboarding/*.txt]  ->ingest all .txt files
+index = wave09
+sourcetype = wave09_test
+
+[monitor:///opt/test_onboarding/*.json]   ->ingest all .json files
+index = wave09
+sourcetype = wave09_test
+
+[monitor:///opt/test_onboarding/*]   ->ingest all files
+index = wave09
+sourcetype = wave09_test
