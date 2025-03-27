@@ -1,0 +1,24 @@
+data onboarding:
+
+go to IDX web interface:
+
+GUI>>
+settings-->indexes--->new indexes
+
+give a name and save the index.
+
+"main" is the default index.
+
+UF>>
+
+# cd /opt/splunkfoewarder/etc/system/local
+# vi inputs.conf
+
+[monitor://<path_of_the_log_file>]    --->anything inside the squre bracket is called a stanza
+index = <index_name>
+sourcetype = <sourcetype_name>
+
+eg:
+[monitor:///tmp/g.txt]
+index = test
+sourcetype = test_log
