@@ -1,0 +1,52 @@
+filtering: transforms.conf
+
+[<transformation_name>]
+attritibutes = <value>
+
+then edit props.conf
+[<sourcetype_name>]
+TRANSFORMS-<class_name> = <transformation_name1>, <transformation_name2>, <transformation_name3>
+
+Krishna is from Hyderabad,
+Lokanadham is from Mumbai,
+Sajida is from Hyderabad,
+Subhradip is from Kolkata,
+
+vi transforms.conf
+[one]
+REGEX = .
+DEST_KEY = queue
+FORMAT = nullQueue
+
+[two]
+REGEX = (?i)Hyderabad
+DEST_KEY = queue
+FORMAT = indexQueue
+
+vi props.conf
+[...]
+...
+...
+TRANSFORMS-filter_city = one, two
+
+if we want to filter out hyderabad, and ingest others.
+vi transforms.conf
+[one]
+REGEX = (?i)Hyderabad
+DEST_KEY = queue
+FORMAT = nullQueue
+
+Krishna logged in from 192.168.12.24 using port 22
+Sajida logged in from 192.168.13.34 using port 34
+Loknadham logged in from 192.168.23.43 using port 35
+
+vi transforms.conf
+[extract]
+REGEX = (\w+)\s+.*(\d{3}.\d{3}.\d{1,3}.\d{1,3}).*port\s+(\d+)
+FORMAT = User=$1 IP=$2 Port=$3
+DEST_KEY = _raw
+
+vi props.conf
+[..]
+......
+TRASFORMS-fields = extract
