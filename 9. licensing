@@ -1,0 +1,9 @@
+licensing:
+License master:
+Which instance have license uploaded to.
+GUI>settings>licensing>add license
+
+license slave:
+are those instance which is connected with license master.
+GUI > settings>licensing>change to slave
+put ip adress of LM along with 8089 port.
