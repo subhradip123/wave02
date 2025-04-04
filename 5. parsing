@@ -1,0 +1,45 @@
+Parsing:
+
+HF>>
+
+# cd $SPLUNK_HOME/etc/system/local
+
+# cd /opt/splunk/etc/system/local
+
+Create a file named props.conf
+# vi props.conf
+
+[<sourcetype_name>]
+attributes=value
+
+
+This is Dinesh.
+This is Jayanta.
+This is Surya.
+
+SHOULD_LINEMERGE = false
+
+This is Dinesh.
+
+This is Jayanta.
+
+This is Surya.
+
+
+............>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+This is Subhra, Subhra is 26 years old.
+This is Jayanta, Jayanta is 26 years old.
+This is Umesh, Umesh is 27 years old.
+
+
+
+
+[txt_log]
+LINE_BREAKER = (,)
+
+
+eg.
+[txt_log]
+SHOULD_LINEMERGE = false
+LINE_BREAKER = (,)
