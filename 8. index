@@ -1,0 +1,84 @@
+index creation:
+inside idx-->
+index path-->
+#cd $SPLUNK_HOME/var/lib/splunk
+
+create index:
+#cd $SPLLUNK_HOME/etc/system/local/
+
+vi indexes.conf
+
+[<index_name>]
+homePath=/opt/splunk/var/lib/splunk/<index_name>/db
+coldPath=/opt/splunk/var/lib/splunk/<index_name>/colddb
+thawedPath=/opt/splunk/var/lib/splunk/<index_name>/thaweddb
+
+DB: (data bucket)
+hot
+warm
+cold
+
+.....retention policy............frozen state.......
+When data went to frozen state that data is not searchable anymore.
+If there is no archive path then data will be deleted forever in frozen state.
+After data data goes to archive and need to recover then thaweddb comes in scenario.
+
+thaweddb
+
+[note: retention period: how long your data will be in searchable state]
+
+bucket rolling criteria -->https://splunkonbigdata.com/bucket-rolling-criteria-in-splunk/
+
+.tsidx--->time series index file--> searchable copy of data
+rawdata--->not a searchable copy.
+
+eg:
+[db_test]
+homePath=/opt/splunk/var/lib/splunk/db_test/db
+coldPath=/opt/splunk/var/lib/splunk/db_test/colddb
+thawedPath=/opt/splunk/var/lib/splunk/db_test/thaweddb
+
+1655355651-1655355651-9626448297081496970.tsidx
+
+attribute to specify number of warm buckets.
+
+[db_test]
+homePath=/opt/splunk/var/lib/splunk/db_test/db
+coldPath=/opt/splunk/var/lib/splunk/db_test/colddb
+thawedPath=/opt/splunk/var/lib/splunk/db_test/thaweddb
+maxWarmDBCount=1
+
+set retention policy:
+
+[db_test]
+homePath=/opt/splunk/var/lib/splunk/db_test/db
+coldPath=/opt/splunk/var/lib/splunk/db_test/colddb
+thawedPath=/opt/splunk/var/lib/splunk/db_test/thaweddb
+maxWarmDBCount=1
+frozenTimePeriodInSecs=120                                          -----> after 120 seconds data in colddeb is going to delete.
+
+
+archive policy:
+
+[db_test]
+homePath=/opt/splunk/var/lib/splunk/db_test/db
+coldPath=/opt/splunk/var/lib/splunk/db_test/colddb
+thawedPath=/opt/splunk/var/lib/splunk/db_test/thaweddb
+maxWarmDBCount=1
+frozenTimePeriodInSecs=120
+coldToFrozenDir=/tmp/archive
+
+restore the data:
+
+copy the file from archive path to thaweddb.
+
+cp -R /tmp/archive/db... /opt/splunk/var/lib/splunk/db_test/thaweddb
+
+if you are inside thaweddb
+cp -R /tmp/arcive/db.. .
+
+eg: cp -R /tmp/archive/db_1655358140_1655358140_2/ .
+
+# run rebuild command.
+#cd /opt/splunk/bin
+#./splunk rebuild /opt/splunk/var/lib/splunk/db_test/thaweddb/db_.../
